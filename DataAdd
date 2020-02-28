@@ -1,0 +1,101 @@
+#include<iostream>
+
+using namespace std;
+
+struct Node{
+ int data ;
+ Node *next ;
+ 
+ Node(int d=0){
+  data = d ;
+  next = NULL ;
+ }
+};
+
+class List{
+ 
+ Node *head = NULL ;
+ unsigned int count ;
+public:
+ void addFront(int eklenen){
+  
+  if(head == NULL){
+   
+   head = new Node(eklenen);
+   
+  }else {
+   
+  Node *tmp = head ;
+  head = new Node(eklenen);
+  head->next =tmp ;
+  }
+
+ count++;
+ 
+ }
+ 
+ void addBack(int eklenen){
+  
+  if(head == NULL){
+    
+   head = new Node(eklenen);
+   
+  }else{
+   
+   Node *temp ;
+   for(temp = head ; temp->next != NULL ; temp=temp->next);
+   temp->next = new Node(eklenen);
+   
+   
+  }
+  
+  count ++ ;
+  
+ }
+ 
+ bool popFront(){
+  
+  if(head == NULL){
+   
+   return false;
+   
+  } else {
+   
+   Node *temp = head ;
+   head = temp->next;
+   delete temp ;
+  // count--;
+   return true ;
+   
+   
+  }
+  
+  
+  
+ }
+ 
+ 
+   
+  void Print(){
+  cout <<"List with " << count << " Elements" << endl ;
+  
+  for(Node *p = head ; p!=NULL ; p = p->next){
+   cout << p->data <<", ";
+  }
+  cout << endl;
+ }
+};
+
+ int main(){
+  
+  List l;
+  l.addFront(5);
+  l.addFront(8);
+  l.Print();
+  l.addBack(10);
+  l.Print();
+  l.popFront();
+  l.Print();
+  
+  return 0 ;
+ }
